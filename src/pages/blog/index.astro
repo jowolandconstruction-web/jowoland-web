@@ -1,0 +1,54 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import SectionHeader from '@/components/jowoland/shared/SectionHeader.astro';
+import BlogCard from '@/components/jowoland/blog/BlogCard.astro';
+import { getBlogPosts } from '@/lib/wordpress/posts';
+import { SITE, createWebPageSchema } from '@/data/site';
+import { isWordPressConfigured } from '@/lib/env';
+
+const posts = await getBlogPosts();
+
+const pageTitle = `Blog | ${SITE.title}`;
+const metaDescription =
+  'Artikel edukasi seputar pondasi bore pile, strauss pile, dan tips konstruksi dari PT. Jowo Land Construction.';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  lang="id"
+  structuredData={createWebPageSchema('/blog', pageTitle, metaDescription, 'Blog')}
+>
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <SectionHeader
+      title="Blog"
+      subtitle="Artikel edukasi seputar pondasi bore pile, strauss pile, dan tips konstruksi. Konten diambil dari WordPress CMS."
+    />
+
+    {
+      !isWordPressConfigured() && (
+        <div class="mb-8 rounded-lg border border-yellow-300 bg-yellow-50 p-4 text-sm text-yellow-800 dark:border-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300">
+          WordPress belum dikonfigurasi. Atur WORDPRESS_URL di file .env untuk
+          menampilkan artikel dari CMS.
+        </div>
+      )
+    }
+
+    {
+      posts.length === 0 ? (
+        <p class="text-center text-neutral-600 dark:text-neutral-400">
+          Belum ada artikel. Tambahkan postingan di WordPress CMS Anda.
+        </p>
+      ) : (
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map(post => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+      )
+    }
+  </section>
+</MainLayout>

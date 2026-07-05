@@ -1,0 +1,63 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import SectionHeader from '@/components/jowoland/shared/SectionHeader.astro';
+import PortfolioCard from '@/components/jowoland/portfolio/PortfolioCard.astro';
+import { getPortfolioProjects } from '@/lib/wordpress/woocommerce';
+import { SITE, createWebPageSchema } from '@/data/site';
+import { isWooCommerceConfigured } from '@/lib/env';
+import { fallbackPortfolio } from '@/data/fallback/portfolio';
+import type { PortfolioProject } from '@/lib/wordpress/types';
+
+const projects = await getPortfolioProjects();
+
+// Separate services (which are the first project(s))
+const services = projects.filter(p => p.name.includes('Jasa'));
+
+const pageTitle = 'Portofolio Proyek | PT. Jowo Land Construction';
+const metaDescription =
+  'Portofolio proyek pondasi bore pile dan strauss pile PT. Jowo Land Construction di seluruh Indonesia.';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  lang="id"
+  structuredData={createWebPageSchema('/portfolio', pageTitle, metaDescription, 'CollectionPage')}
+>
+  {/* Section 1: Layanan */}
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <SectionHeader
+      title="Layanan Kami"
+      subtitle="Kami menyediakan berbagai layanan jasa bore pile dan strauss pile dengan harga kompetitif dan kualitas terbaik."
+    />
+
+    {
+      services.length > 0 ? (
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {services.map(project => <PortfolioCard project={project} />)}
+        </div>
+      ) : (
+        <div class="text-center text-neutral-600 dark:text-neutral-400">
+          Layanan akan ditampilkan dari WooCommerce.
+        </div>
+      )
+    }
+  </section>
+
+  {/* Section 2: Portofolio Proyek */}
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full bg-neutral-50 dark:bg-neutral-900/50"
+  >
+    <SectionHeader
+      title="Portofolio Proyek"
+      subtitle="Dokumentasi pekerjaan pondasi bore pile dari berbagai proyek konstruksi."
+    />
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {fallbackPortfolio.map(project => <PortfolioCard project={project} />)}
+    </div>
+  </section>
+</MainLayout>

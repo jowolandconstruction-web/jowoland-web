@@ -1,0 +1,25 @@
+export const IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&h=800&fit=crop',
+  borePile: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop',
+  soilTest: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=600&fit=crop',
+  drilling: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop',
+  rebar: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=600&fit=crop',
+  pouring: 'https://images.unsplash.com/photo-1590496793929-36417d3117de?w=800&h=600&fit=crop',
+  qc: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+  equipment: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop',
+  team: 'https://images.unsplash.com/photo-1504309096790-45a20ed1d2a0?w=800&h=600&fit=crop',
+  strauss: 'https://images.unsplash.com/photo-1598488035139-bdbb2231bcc0?w=800&h=600&fit=crop',
+  excavator: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop',
+  about: 'https://images.unsplash.com/photo-1541976590-713941681591?w=1200&h=800&fit=crop',
+  founder: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=600&fit=crop',
+  portfolio: {
+    default: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop',
+    factory: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=600&fit=crop',
+    building: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
+    warehouse: 'https://images.unsplash.com/photo-1586528116493-48c289b9a0a2?w=800&h=600&fit=crop',
+    hospital: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=600&fit=crop',
+  },
+  blog: {
+    default: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop',
+  },
+} as const;

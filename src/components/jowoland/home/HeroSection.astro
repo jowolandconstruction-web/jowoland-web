@@ -1,0 +1,44 @@
+---
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
+import { heroContent } from '@/data/home/sections';
+---
+
+<section
+  class="mx-auto grid max-w-[85rem] gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 2xl:max-w-full"
+>
+  <div>
+    <p
+      class="mb-3 text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400"
+    >
+      {heroContent.tagline}
+    </p>
+    <h1
+      class="block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl lg:text-5xl lg:leading-tight dark:text-neutral-200"
+    >
+      {heroContent.h1}
+    </h1>
+    {
+      heroContent.intro.map(paragraph => (
+        <p class="mt-4 text-base leading-relaxed text-pretty text-neutral-700 dark:text-neutral-400">
+          {paragraph}
+        </p>
+      ))
+    }
+    <div class="mt-7 flex flex-wrap gap-3">
+      <PrimaryCTA title={heroContent.primaryCta} url="/contact" />
+      <SecondaryCTA title={heroContent.secondaryCta} url="/portfolio" />
+    </div>
+  </div>
+
+  <div class="overflow-hidden rounded-2xl shadow-lg">
+    <img
+      src="/assets/img/beranda/hero.webp"
+      alt="Kontraktor jasa bored pile PT. Jowo Land Construction"
+      class="h-full w-full object-cover"
+      loading="eager"
+      width="1200"
+      height="800"
+    />
+  </div>
+</section>

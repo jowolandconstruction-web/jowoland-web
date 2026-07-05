@@ -1,0 +1,75 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getBlogPosts } from '@/lib/wordpress/posts';
+import { SITE, createWebPageSchema } from '@/data/site';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts(100);
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const formattedDate = new Date(post.date).toLocaleDateString('id-ID', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const pageTitle = `${post.title} | Blog | ${SITE.title}`;
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={post.excerpt}
+  customOgTitle={pageTitle}
+  lang="id"
+  structuredData={{
+    ...createWebPageSchema(`/blog/${post.slug}`, post.title, post.excerpt, 'Article'),
+    headline: post.title,
+    datePublished: post.date,
+    image: post.image,
+  }}
+>
+  <article
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <a
+      href="/blog"
+      class="mb-6 inline-flex items-center text-sm text-yellow-600 hover:underline dark:text-yellow-400"
+    >
+      ← Kembali ke Blog
+    </a>
+
+    <div class="mx-auto max-w-3xl">
+      <time
+        datetime={post.date}
+        class="text-sm font-medium text-yellow-600 dark:text-yellow-400"
+      >
+        {formattedDate}
+      </time>
+      <h1
+        class="mt-2 text-3xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200"
+      >
+        {post.title}
+      </h1>
+
+      <div class="mt-8 overflow-hidden rounded-2xl">
+        <img
+          src={post.image}
+          alt={post.imageAlt}
+          class="w-full object-cover"
+          loading="eager"
+        />
+      </div>
+
+      <div
+        class="prose prose-neutral mt-10 max-w-none dark:prose-invert"
+        set:html={post.content}
+      />
+    </div>
+  </article>
+</MainLayout>

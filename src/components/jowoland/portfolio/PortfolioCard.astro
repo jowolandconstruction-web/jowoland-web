@@ -1,0 +1,98 @@
+---
+import type { PortfolioProject } from '@/lib/wordpress/types';
+
+interface Props {
+  project: PortfolioProject;
+}
+
+const { project } = Astro.props;
+const image = project.image;
+
+// Strip HTML tags for description preview
+const stripHtml = (html: string) => {
+  return html.replace(/<[^>]*>/g, '');
+};
+---
+
+<article
+  class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900"
+>
+  <div class="aspect-4/3 overflow-hidden">
+    <img
+      src={image}
+      alt={project.imageAlt || project.name}
+      class="h-full w-full object-cover"
+      loading="lazy"
+    />
+  </div>
+  <div class="p-5">
+    <h3
+      class="font-bold text-neutral-800 dark:text-neutral-200"
+    >
+      {project.name}
+    </h3>
+
+    <div class="mt-3">
+      {
+        project.discountPrice ? (
+          <div class="flex items-center gap-2">
+            <span class="line-through text-neutral-400 text-sm">{project.price}</span>
+            <span class="text-lg font-bold text-yellow-600 dark:text-yellow-400">{project.discountPrice}</span>
+            <span class="text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded-full dark:bg-green-900/30 dark:text-green-300">Diskon</span>
+          </div>
+        ) : (
+          project.price && (
+            <span class="text-lg font-bold text-yellow-600 dark:text-yellow-400">{project.price}</span>
+          )
+        )
+      }
+    </div>
+
+    <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3">
+      {stripHtml(project.description)}
+    </p>
+
+    <dl class="mt-4 space-y-2">
+      {
+        project.location && (
+          <div class="flex justify-between text-sm">
+            <dt class="text-neutral-500 dark:text-neutral-400">Lokasi:</dt>
+            <dd class="font-medium text-neutral-800 dark:text-neutral-200">{project.location}</dd>
+          </div>
+        )
+      }
+      {
+        project.method && (
+          <div class="flex justify-between text-sm">
+            <dt class="text-neutral-500 dark:text-neutral-400">Metode:</dt>
+            <dd class="font-medium text-neutral-800 dark:text-neutral-200">{project.method}</dd>
+          </div>
+        )
+      }
+      {
+        project.diameter && (
+          <div class="flex justify-between text-sm">
+            <dt class="text-neutral-500 dark:text-neutral-400">Diameter:</dt>
+            <dd class="font-medium text-neutral-800 dark:text-neutral-200">{project.diameter}</dd>
+          </div>
+        )
+      }
+      {
+        project.depth && (
+          <div class="flex justify-between text-sm">
+            <dt class="text-neutral-500 dark:text-neutral-400">Kedalaman:</dt>
+            <dd class="font-medium text-neutral-800 dark:text-neutral-200">{project.depth}</dd>
+          </div>
+        )
+      }
+      {
+        project.points && (
+          <div class="flex justify-between text-sm">
+            <dt class="text-neutral-500 dark:text-neutral-400">Jumlah Titik:</dt>
+            <dd class="font-medium text-neutral-800 dark:text-neutral-200">{project.points}</dd>
+          </div>
+        )
+      }
+    </dl>
+  </div>
+</article>

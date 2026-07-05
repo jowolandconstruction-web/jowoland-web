@@ -1,0 +1,71 @@
+---
+import { borePileIntro } from '@/data/home/sections';
+import { IMAGES } from '@/data/images';
+---
+
+<section
+  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+>
+  <div class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <h2
+        class="text-2xl font-bold text-neutral-800 md:text-3xl dark:text-neutral-200"
+      >
+        {borePileIntro.title}
+      </h2>
+      {
+        borePileIntro.paragraphs.map(p => (
+          <p class="mt-4 text-pretty text-neutral-600 dark:text-neutral-400">
+            {p}
+          </p>
+        ))
+      }
+
+      <div class="mt-6">
+        <h3 class="font-semibold text-neutral-800 dark:text-neutral-200">
+          Fungsi Pondasi Bored Pile
+        </h3>
+        <ul class="mt-3 space-y-2">
+          {
+            borePileIntro.functions.map(item => (
+              <li class="flex items-start gap-2 text-neutral-600 dark:text-neutral-400">
+                <span class="mt-0.5 text-green-600">✔</span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="font-semibold text-neutral-800 dark:text-neutral-200">
+          Cocok Digunakan Bangunan yang Berada di:
+        </h3>
+        <div class="mt-3 flex flex-wrap gap-2">
+          {
+            borePileIntro.suitableFor.map(item => (
+              <span class="rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
+                {item}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="mt-6 text-sm font-medium text-neutral-700 dark:text-neutral-300">
+        {borePileIntro.closingNote}
+      </p>
+    </div>
+
+    <div class="overflow-hidden rounded-2xl">
+      <img
+        src={IMAGES.borePile}
+        alt="Pondasi bored pile strauss pile"
+        class="h-full w-full object-cover"
+        loading="lazy"
+        width="800"
+        height="600"
+      />
+    </div>
+  </div>
+</section>

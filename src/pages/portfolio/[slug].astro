@@ -1,0 +1,241 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getPortfolioProjects } from '@/lib/wordpress/woocommerce';
+import { SITE, COMPANY, createWebPageSchema } from '@/data/site';
+import { IMAGES } from '@/data/images';
+import PortfolioCard from '@/components/jowoland/portfolio/PortfolioCard.astro';
+
+export async function getStaticPaths() {
+  const projects = await getPortfolioProjects();
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project, allProjects: projects },
+  }));
+}
+
+const { project, allProjects } = Astro.props;
+const image = project.image || IMAGES.portfolio.default;
+
+// Strip HTML tags for meta description
+const stripHtml = (html: string) => {
+  return html.replace(/<[^>]*>/g, '');
+};
+
+const pageTitle = `${project.name} | Portofolio | ${SITE.title}`;
+const metaDescription = `${stripHtml(project.description)} | Harga mulai ${project.discountPrice || project.price} per meter`;
+
+// Get other projects excluding current one, max 4
+const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  lang="id"
+  structuredData={createWebPageSchema(
+    `/portfolio/${project.slug}`,
+    project.name,
+    metaDescription,
+    'Service'
+  )}
+>
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <a
+      href="/portfolio"
+      class="mb-6 inline-flex items-center text-sm text-yellow-600 hover:underline dark:text-yellow-400"
+    >
+      ← Kembali ke Portofolio
+    </a>
+
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-2xl">
+        <img
+          src={image}
+          alt={project.imageAlt}
+          class="w-full object-contain"
+          loading="eager"
+        />
+      </div>
+
+      <div>
+        <h1
+          class="text-3xl font-bold text-neutral-800 dark:text-neutral-200"
+        >
+          {project.name}
+        </h1>
+
+        <dl class="mt-8 space-y-4">
+          {
+            project.location && (
+              <div>
+                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                  Lokasi
+                </dt>
+                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                  {project.location}
+                </dd>
+              </div>
+            )
+          }
+          {
+            project.method && (
+              <div>
+                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                  Metode
+                </dt>
+                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                  {project.method}
+                </dd>
+              </div>
+            )
+          }
+          {
+            project.diameter && (
+              <div>
+                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                  Diameter
+                </dt>
+                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                  {project.diameter}
+                </dd>
+              </div>
+            )
+          }
+          {
+            project.depth && (
+              <div>
+                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                  Kedalaman
+                </dt>
+                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                  {project.depth}
+                </dd>
+              </div>
+            )
+          }
+          {
+            project.points && (
+              <div>
+                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                  Jumlah Titik
+                </dt>
+                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                  {project.points}
+                </dd>
+              </div>
+            )
+          }
+          {
+            project.price && (
+              <div>
+                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                  Estimasi Biaya:
+                </dt>
+                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                  {
+                    project.discountPrice ? (
+                      <>
+                        <span class="line-through text-neutral-400 mr-3">{project.price}</span>
+                        <span class="text-yellow-600 dark:text-yellow-400">{project.discountPrice}</span>
+                        <span class="ml-2 inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-300">Diskon</span>
+                      </>
+                    ) : project.price
+                  }
+                </dd>
+              </div>
+            )
+          }
+        </dl>
+
+        {/* Categories */}
+        {
+          project.categories && project.categories.length > 0 && (
+            <div class="mt-6">
+              <dt class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
+                Kategori
+              </dt>
+              <div class="flex flex-wrap gap-2">
+                {
+                  project.categories.map(cat => (
+                    <span class="inline-block rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300">
+                      {cat}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
+
+        {/* Tags */}
+        {
+          project.tags && project.tags.length > 0 && (
+            <div class="mt-6">
+              <dt class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
+                Tag
+              </dt>
+              <div class="flex flex-wrap gap-2">
+                {
+                  project.tags.map(tag => (
+                    <span class="inline-block rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+                      #{tag}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
+
+        <a
+          href={`https://wa.me/${COMPANY.phoneWa}?text=${encodeURIComponent(`Halo PT. Jowo Land Construction, saya ingin konsultasi tentang ${project.name}`)}`}
+          target="_blank"
+          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-yellow-200 transition hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 dark:shadow-yellow-900/30"
+        >
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.882 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+            ></path>
+          </svg>
+          Hubungi Kami Via WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Deskripsi Lengkap Section */}
+  {
+    project.description && (
+      <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+        <div class="grid gap-10 lg:grid-cols-2 lg:col-span-2">
+          <div class="lg:col-span-2">
+            <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">Deskripsi Lengkap</h2>
+            <div
+              class="prose prose-neutral max-w-none dark:prose-invert"
+              set:html={project.description}
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Proyek Lainnya Section */}
+  {
+    otherProjects.length > 0 && (
+      <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+        <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-8">Proyek Lainnya</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            otherProjects.map(p => (
+              <PortfolioCard project={p} />
+            ))
+          }
+        </div>
+      </section>
+    )
+  }
+</MainLayout>

@@ -1,0 +1,18 @@
+---
+import Icon from '../icons/Icon.astro';
+import { COMPANY } from '@data/site';
+---
+
+<a
+  href={`https://wa.me/${COMPANY.phoneWa}`}
+  target="_blank"
+  class="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#128C7E] focus:outline-none focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800"
+  aria-label="Chat via WhatsApp"
+>
+  <div class="pl-4 pr-2 py-2 flex items-center gap-3">
+    <span class="text-sm font-semibold whitespace-nowrap">Hubungi Kami</span>
+    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
+      <Icon name="whatsapp" />
+    </div>
+  </div>
+</a>

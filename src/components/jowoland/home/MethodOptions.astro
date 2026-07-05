@@ -1,0 +1,47 @@
+---
+import { methodOptions } from '@/data/home/pricing-why';
+
+const imageMap = {
+  strauss: '/assets/img/beranda/metode-straus-pile.png',
+  excavator: '/assets/img/beranda/metode-excavator.png',
+};
+---
+
+<section
+  id="metode"
+  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+>
+  <div class="mx-auto mb-10 max-w-3xl text-center">
+    <h2
+      class="text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200"
+    >
+      {methodOptions.title}
+    </h2>
+    <p class="mt-3 text-neutral-600 dark:text-neutral-400">
+      {methodOptions.subtitle}
+    </p>
+  </div>
+
+  <div class="grid gap-8 md:grid-cols-2">
+    {
+      methodOptions.methods.map(method => (
+        <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
+          <img
+        src={imageMap[method.imageKey]}
+        alt={method.title}
+        class="h-auto w-full object-contain"
+        loading="lazy"
+      />
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+              {method.title}
+            </h3>
+            <p class="mt-2 text-neutral-600 dark:text-neutral-400">
+              {method.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,95 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import HeroSection from '@/components/jowoland/home/HeroSection.astro';
+import BorePileIntro from '@/components/jowoland/home/BorePileIntro.astro';
+import WorkMethodSteps from '@/components/jowoland/home/WorkMethodSteps.astro';
+import WhyUsSection from '@/components/jowoland/home/WhyUsSection.astro';
+import PricingSection from '@/components/jowoland/home/PricingSection.astro';
+import MethodOptions from '@/components/jowoland/home/MethodOptions.astro';
+import PortfolioPreview from '@/components/jowoland/home/PortfolioPreview.astro';
+import ServiceAreas from '@/components/jowoland/home/ServiceAreas.astro';
+import ContactCTA from '@/components/jowoland/home/ContactCTA.astro';
+import FAQ from '@components/sections/misc/FAQ.astro';
+import { faqs } from '@/data/faqs';
+import { SITE, createLocalBusinessSchema, createWebPageSchema } from '@/data/site';
+import { getPortfolioProjects } from '@/lib/wordpress/woocommerce';
+
+const portfolioProjects = await getPortfolioProjects();
+
+const pageTitle =
+  'Kontraktor Jasa Bored Pile (Strauss Pile) Harga per Meter | PT. Jowo Land Construction';
+const metaDescription = SITE.description;
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  lang="id"
+  structuredData={[createLocalBusinessSchema(), createWebPageSchema('/', pageTitle, metaDescription)]}
+>
+  <HeroSection />
+  <BorePileIntro />
+  <WorkMethodSteps />
+  <WhyUsSection />
+  <PricingSection />
+  <MethodOptions />
+  <PortfolioPreview projects={portfolioProjects} />
+  <ServiceAreas />
+
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div class="mx-auto mb-8 max-w-3xl text-center">
+      <h2
+        class="text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200"
+      >
+        Testimoni Klien
+      </h2>
+      <p class="mt-3 text-neutral-600 dark:text-neutral-400">
+        Testimoni nyata klien kami melalui Google Business dan telah terverifikasi.
+      </p>
+    </div>
+    <div class="overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-700" id="testimonial-map-container">
+      <!-- Placeholder: Click to load testimonial map -->
+      <button
+        id="testimonial-map-placeholder"
+        class="flex w-full flex-col items-center justify-center gap-3 bg-neutral-100 px-6 py-12 text-center dark:bg-neutral-800"
+        style="height: 400px;"
+      >
+        <svg class="h-12 w-12 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <div>
+          <p class="font-bold text-neutral-800 dark:text-neutral-200">Testimoni Klien</p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Klik untuk melihat testimoni Google</p>
+        </div>
+      </button>
+
+      <!-- Actual testimonial map iframe (hidden until clicked) -->
+      <iframe
+        id="testimonial-map-iframe"
+        class="hidden w-full"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        title="Testimoni Google Business PT. Jowo Land Construction"></iframe>
+    </div>
+
+    <script is:inline>
+      const testimonialPlaceholder = document.getElementById('testimonial-map-placeholder');
+      const testimonialIframe = document.getElementById('testimonial-map-iframe');
+
+      testimonialPlaceholder?.addEventListener('click', () => {
+        testimonialIframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d110.7!3d-7.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDAnMDAuMCJTIDExMMKwNDInMDAuMCJF!5e0!3m2!1sid!2sid!4v1";
+        testimonialIframe.classList.remove('hidden');
+        testimonialPlaceholder.classList.add('hidden');
+      });
+    </script>
+  </section>
+
+  <FAQ title="Pertanyaan Umum<br />Seputar Bore Pile" faqs={faqs} />
+  <ContactCTA />
+</MainLayout>

@@ -1,0 +1,87 @@
+---
+import { workMethodsIntro, workMethodSteps } from '@/data/home/sections';
+
+const imageMap = {
+  intro: '/assets/img/beranda/Mengenal-Apa-itu-Pondasi-Bored-Pile.png',
+  survey: '/assets/img/beranda/survey-lokasi.png',
+  drilling: '/assets/img/beranda/pengeboran.png',
+  rebar: '/assets/img/beranda/fabrikasi-besi.png',
+  pouring: '/assets/img/beranda/pengecoran.png',
+  qc: '/assets/img/beranda/quality-control.png',
+};
+---
+
+<section
+  class="bg-neutral-100 px-4 py-10 sm:px-6 lg:px-8 lg:py-14 dark:bg-neutral-900/50"
+>
+  <div class="mx-auto max-w-[85rem] 2xl:max-w-full">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
+      <h2
+        class="text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200"
+      >
+        {workMethodsIntro.title}
+      </h2>
+      {
+        workMethodsIntro.intro.map(p => (
+          <p class="mt-4 text-pretty text-neutral-600 dark:text-neutral-400">
+            {p}
+          </p>
+        ))
+      }
+    </div>
+
+    <div class="space-y-12">
+      {
+        workMethodSteps.map((step, index) => (
+          <div
+            class:list={[
+              'grid items-center gap-8 lg:grid-cols-2',
+              index % 2 === 1 && 'lg:[direction:rtl] lg:*:[direction:ltr]',
+            ]}
+          >
+            <div>
+              <span class="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
+                Langkah {index + 1}
+              </span>
+              <h3 class="mt-1 text-xl font-bold text-neutral-800 dark:text-neutral-200">
+                {step.title}
+              </h3>
+              {step.content.map(p => (
+                <p class="mt-3 text-pretty text-neutral-600 dark:text-neutral-400">
+                  {p}
+                </p>
+              ))}
+              {step.tests && (
+                <ul class="mt-4 space-y-3">
+                  {step.tests.map(test => (
+                    <li class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+                      <p class="font-semibold text-neutral-800 dark:text-neutral-200">
+                        {test.name}
+                      </p>
+                      <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                        {test.desc}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {step.closingNote && (
+                <p class="mt-4 text-sm italic text-neutral-600 dark:text-neutral-400">
+                  {step.closingNote}
+                </p>
+              )}
+            </div>
+            <div class="overflow-hidden rounded-2xl">
+              <img
+                src={imageMap[step.imageKey]}
+                alt={step.title}
+                class="h-64 w-full object-cover lg:h-80"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

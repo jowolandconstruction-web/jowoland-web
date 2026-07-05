@@ -1,0 +1,33 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import LegalPage from '@/components/jowoland/shared/LegalPage.astro';
+import { privacyPolicy } from '@/data/legal';
+import { SITE, createWebPageSchema } from '@/data/site';
+
+const { meta, title, lastUpdated, sections, contact, commitment, intro } =
+  privacyPolicy;
+
+const allSections = [
+  {
+    title: 'Pendahuluan',
+    content: intro.join('\n\n'),
+  },
+  ...sections,
+];
+---
+
+<MainLayout
+  title={meta.title}
+  customDescription={meta.description}
+  customOgTitle={meta.title}
+  lang="id"
+  structuredData={createWebPageSchema('/privacy-policy', meta.title, meta.description)}
+>
+  <LegalPage
+    title={title}
+    lastUpdated={lastUpdated}
+    sections={allSections}
+    contact={contact}
+    commitment={commitment}
+  />
+</MainLayout>
