@@ -39,20 +39,12 @@ interface Props {
     />
     {/* Define the title of the page */}
     <title>{title}</title>
-    <script is:inline>
-      // Script to handle dark mode with light as default
-      if (localStorage.getItem('hs_theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
     <script>
       import '@scripts/lenisSmoothScroll.js';
     </script>
   </head>
   <body
-    class="flex min-h-screen flex-col bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800"
+    class="flex min-h-screen flex-col bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700"
   >
     {
       /*

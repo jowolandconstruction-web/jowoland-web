@@ -39,7 +39,7 @@ const pageTitle = `${post.title} | Blog | ${SITE.title}`;
   >
     <a
       href="/blog"
-      class="mb-6 inline-flex items-center text-sm text-yellow-600 hover:underline dark:text-yellow-400"
+      class="mb-6 inline-flex items-center text-sm text-yellow-600 hover:underline "
     >
       ← Kembali ke Blog
     </a>
@@ -47,12 +47,12 @@ const pageTitle = `${post.title} | Blog | ${SITE.title}`;
     <div class="mx-auto max-w-3xl">
       <time
         datetime={post.date}
-        class="text-sm font-medium text-yellow-600 dark:text-yellow-400"
+        class="text-sm font-medium text-yellow-600 "
       >
         {formattedDate}
       </time>
       <h1
-        class="mt-2 text-3xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200"
+        class="mt-2 text-3xl font-bold text-neutral-800 md:text-4xl "
       >
         {post.title}
       </h1>
@@ -67,7 +67,7 @@ const pageTitle = `${post.title} | Blog | ${SITE.title}`;
       </div>
 
       <div
-        class="prose prose-neutral mt-10 max-w-none dark:prose-invert"
+        class="prose prose-neutral mt-10 max-w-none "
         set:html={post.content}
       />
     </div>

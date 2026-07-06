@@ -15,7 +15,7 @@ const formattedDate = new Date(post.date).toLocaleDateString('id-ID', {
 ---
 
 <article
-  class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900"
+  class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:shadow-md  "
 >
   <a href={`/blog/${post.slug}`} class="block">
     <div class="aspect-video overflow-hidden">
@@ -29,16 +29,16 @@ const formattedDate = new Date(post.date).toLocaleDateString('id-ID', {
     <div class="p-5">
       <time
         datetime={post.date}
-        class="text-xs font-medium text-yellow-600 dark:text-yellow-400"
+        class="text-xs font-medium text-yellow-600 "
       >
         {formattedDate}
       </time>
       <h3
-        class="mt-2 text-lg font-bold text-neutral-800 group-hover:text-yellow-600 dark:text-neutral-200 dark:group-hover:text-yellow-400"
+        class="mt-2 text-lg font-bold text-neutral-800 group-hover:text-yellow-600  "
       >
         {post.title}
       </h3>
-      <p class="mt-2 line-clamp-3 text-sm text-neutral-600 dark:text-neutral-400">
+      <p class="mt-2 line-clamp-3 text-sm text-neutral-600 ">
         {post.excerpt}
       </p>
     </div>

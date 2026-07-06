@@ -45,7 +45,7 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
   >
     <a
       href="/portfolio"
-      class="mb-6 inline-flex items-center text-sm text-yellow-600 hover:underline dark:text-yellow-400"
+      class="mb-6 inline-flex items-center text-sm text-yellow-600 hover:underline "
     >
       ← Kembali ke Portofolio
     </a>
@@ -62,7 +62,7 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
 
       <div>
         <h1
-          class="text-3xl font-bold text-neutral-800 dark:text-neutral-200"
+          class="text-3xl font-bold text-neutral-800 "
         >
           {project.name}
         </h1>
@@ -71,10 +71,10 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
           {
             project.location && (
               <div>
-                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                <dt class="text-sm text-neutral-500 ">
                   Lokasi
                 </dt>
-                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                <dd class="text-lg font-medium text-neutral-800 ">
                   {project.location}
                 </dd>
               </div>
@@ -83,10 +83,10 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
           {
             project.method && (
               <div>
-                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                <dt class="text-sm text-neutral-500 ">
                   Metode
                 </dt>
-                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                <dd class="text-lg font-medium text-neutral-800 ">
                   {project.method}
                 </dd>
               </div>
@@ -95,10 +95,10 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
           {
             project.diameter && (
               <div>
-                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                <dt class="text-sm text-neutral-500 ">
                   Diameter
                 </dt>
-                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                <dd class="text-lg font-medium text-neutral-800 ">
                   {project.diameter}
                 </dd>
               </div>
@@ -107,10 +107,10 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
           {
             project.depth && (
               <div>
-                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                <dt class="text-sm text-neutral-500 ">
                   Kedalaman
                 </dt>
-                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                <dd class="text-lg font-medium text-neutral-800 ">
                   {project.depth}
                 </dd>
               </div>
@@ -119,10 +119,10 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
           {
             project.points && (
               <div>
-                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                <dt class="text-sm text-neutral-500 ">
                   Jumlah Titik
                 </dt>
-                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                <dd class="text-lg font-medium text-neutral-800 ">
                   {project.points}
                 </dd>
               </div>
@@ -131,16 +131,16 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
           {
             project.price && (
               <div>
-                <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                <dt class="text-sm text-neutral-500 ">
                   Estimasi Biaya:
                 </dt>
-                <dd class="text-lg font-medium text-neutral-800 dark:text-neutral-200">
+                <dd class="text-lg font-medium text-neutral-800 ">
                   {
                     project.discountPrice ? (
                       <>
                         <span class="line-through text-neutral-400 mr-3">{project.price}</span>
-                        <span class="text-yellow-600 dark:text-yellow-400">{project.discountPrice}</span>
-                        <span class="ml-2 inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-300">Diskon</span>
+                        <span class="text-yellow-600 ">{project.discountPrice}</span>
+                        <span class="ml-2 inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700  ">Diskon</span>
                       </>
                     ) : project.price
                   }
@@ -154,13 +154,13 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
         {
           project.categories && project.categories.length > 0 && (
             <div class="mt-6">
-              <dt class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
+              <dt class="text-sm text-neutral-500  mb-2">
                 Kategori
               </dt>
               <div class="flex flex-wrap gap-2">
                 {
                   project.categories.map(cat => (
-                    <span class="inline-block rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300">
+                    <span class="inline-block rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-700  ">
                       {cat}
                     </span>
                   ))
@@ -174,13 +174,13 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
         {
           project.tags && project.tags.length > 0 && (
             <div class="mt-6">
-              <dt class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
+              <dt class="text-sm text-neutral-500  mb-2">
                 Tag
               </dt>
               <div class="flex flex-wrap gap-2">
                 {
                   project.tags.map(tag => (
-                    <span class="inline-block rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+                    <span class="inline-block rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700  ">
                       #{tag}
                     </span>
                   ))
@@ -193,7 +193,7 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
         <a
           href={`https://wa.me/${COMPANY.phoneWa}?text=${encodeURIComponent(`Halo PT. Jowo Land Construction, saya ingin konsultasi tentang ${project.name}`)}`}
           target="_blank"
-          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-yellow-200 transition hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 dark:shadow-yellow-900/30"
+          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-yellow-200 transition hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 "
         >
           <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
             <path
@@ -212,9 +212,9 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
       <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
         <div class="grid gap-10 lg:grid-cols-2 lg:col-span-2">
           <div class="lg:col-span-2">
-            <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">Deskripsi Lengkap</h2>
+            <h2 class="text-2xl font-bold text-neutral-800  mb-6">Deskripsi Lengkap</h2>
             <div
-              class="prose prose-neutral max-w-none dark:prose-invert"
+              class="prose prose-neutral max-w-none "
               set:html={project.description}
             />
           </div>
@@ -227,7 +227,7 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
   {
     otherProjects.length > 0 && (
       <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-        <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-8">Proyek Lainnya</h2>
+        <h2 class="text-2xl font-bold text-neutral-800  mb-8">Proyek Lainnya</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {
             otherProjects.map(p => (

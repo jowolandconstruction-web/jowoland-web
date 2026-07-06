@@ -30,7 +30,7 @@ const metaDescription =
 
     {
       !isWordPressConfigured() && (
-        <div class="mb-8 rounded-lg border border-yellow-300 bg-yellow-50 p-4 text-sm text-yellow-800 dark:border-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300">
+        <div class="mb-8 rounded-lg border border-yellow-300 bg-yellow-50 p-4 text-sm text-yellow-800   ">
           WordPress belum dikonfigurasi. Atur WORDPRESS_URL di file .env untuk
           menampilkan artikel dari CMS.
         </div>
@@ -39,7 +39,7 @@ const metaDescription =
 
     {
       posts.length === 0 ? (
-        <p class="text-center text-neutral-600 dark:text-neutral-400">
+        <p class="text-center text-neutral-600 ">
           Belum ada artikel. Tambahkan postingan di WordPress CMS Anda.
         </p>
       ) : (
