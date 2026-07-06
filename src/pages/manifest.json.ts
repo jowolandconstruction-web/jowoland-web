@@ -1,7 +1,6 @@
 import type { APIRoute, ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
-import icon from '@images/icon.png';
-import maskableIcon from '@images/icon-maskable.png';
+import logo from '@images/logo.webp';
 
 interface Favicon {
   purpose: 'any' | 'maskable' | 'monochrome';
@@ -13,12 +12,7 @@ const sizes = [192, 512];
 const favicons: Favicon[] = [
   {
     purpose: 'any',
-    src: icon,
-    sizes,
-  },
-  {
-    purpose: 'maskable',
-    src: maskableIcon,
+    src: logo,
     sizes,
   },
 ];
@@ -44,14 +38,14 @@ export const GET: APIRoute = async () => {
   );
 
   const manifest = {
-    short_name: 'ScrewFast',
-    name: 'ScrewFast',
+    short_name: 'JowoLand',
+    name: 'JowoLand Bore Pile',
     icons,
     display: 'minimal-ui',
     id: '/',
     start_url: '/',
-    theme_color: '#FFEDD5',
-    background_color: '#262626',
+    theme_color: '#facc15',
+    background_color: '#ffffff',
   };
 
   return new Response(JSON.stringify(manifest));
